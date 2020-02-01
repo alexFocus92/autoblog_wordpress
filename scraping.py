@@ -146,3 +146,4 @@ for translation in articulos.cuerpo:
 
 a = translator.translate(articulos.titulo[10],src='en', dest='es')
 
+#fin

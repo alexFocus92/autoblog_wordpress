@@ -1,0 +1,5 @@
+pandas==0.24.1
+beautifulsoup4==4.8.1
+newspaper3k==0.2.8
+googletrans==2.4.0
+DateTime==4.3

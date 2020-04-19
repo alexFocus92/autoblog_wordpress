@@ -28,6 +28,9 @@ class NewsTranslated():
         
        
     def translate_articles_df(self):
+        print("==============================================================")
+        print("              TRANSLATING NEWS WITH GOOGLE API                ")
+        print("==============================================================")
         self.df_traducidos = pd.DataFrame(columns=["periodico","url","fecha","titulo","cuerpo","titulo_traducido","cuerpo_traducido"])
         
         for index, row in self.articulos.iterrows():
@@ -60,6 +63,9 @@ class NewsTranslated():
         return self.df_traducidos
         
     def save_df(self):
+        print("==============================================================")
+        print("                      SAVING EXCEL AND CSV                    ")
+        print("==============================================================")
         self.df_traducidos.to_excel(r'DATA/ML1_translated'+".xlsx", encoding="utf-8")
         self.df_traducidos.to_csv(r'DATA/ML1_translated'+".csv", encoding="utf-8", sep = ';')
 

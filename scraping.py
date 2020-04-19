@@ -24,8 +24,7 @@ def extraction(url, no_valid_url):
         print("{} no valid urls until now".format(no_valid_url))
     return article
 
-def auto_truncate(val):
-    return val[:4999]
+
 
 #%% Class definition
 
@@ -35,8 +34,13 @@ class News(object):
         self.url_news = list()
         self.texts = pd.DataFrame(columns=["periodico","url","fecha","titulo","cuerpo"])
 
+
     def get_url_news(self, lista_general=None, lista_especifica=None, termino_filtrado=None):
 
+        print("==============================================================")
+        print("                ANALISING AND GETTING URLS                    ")
+        print("==============================================================")
+        
         self.url_news = list()
         list_aux = list()
 
@@ -65,15 +69,19 @@ class News(object):
     def get_texts(self):
         self.texts = pd.DataFrame(columns=["periodico","url","fecha","titulo","cuerpo"])
         no_valid_url = 0
-
+        
+        print("==============================================================")
+        print("                 STARTING SCRAPING PROCESS                    ")
+        print("==============================================================")
 
         for pos,url in enumerate(self.url_news):
             try:
                 article = Article(url, fetch_images=False, language = 'es')
                 article.download()
                 article.parse()
-
                 date = article.publish_date
+                if pos % 10 == 1:
+                    print('URL Nº: ' + str(pos) + ' analizada')
                 if date is not None:
                     date = article.publish_date.strftime("%Y-%m-%d")
                 else:
@@ -84,7 +92,7 @@ class News(object):
 
             except Exception as err:
                 no_valid_url += 1
-
+                print('url no valida')
 
         print("\nProceso finalizado\n{} urls no han podido ser procesadas".format(no_valid_url))
         print("\n{} noticias han sido descargadas".format(self.texts.shape[0]))

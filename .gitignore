@@ -13,7 +13,8 @@ DATA
 *.exe
 *.o
 *.so
-
+*.csv
+*.xlsx
 *.so
 
 # Packages #

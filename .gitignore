@@ -3,7 +3,7 @@ node_modules/
 someOtherfoler/
 config.py
 __pycache__/
-DATA
+DATA/
 
 # Compiled source #
 ###################

@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Sun May 19 22:39:47 2019
-
-@author: alejandroortega
-"""
-
 # -*- coding: utf-8 -*-
 """
 Created on Mon May 13 10:23:58 2019
@@ -13,7 +5,6 @@ Created on Mon May 13 10:23:58 2019
 @author: alejandro.ortega.or1
 """
 
-#%% Libreries
 import newspaper
 from newspaper import Article
 import pandas as pd
@@ -100,50 +91,13 @@ class News(object):
 
     def save_as_csv(self,filename):
         #date = datetime.datetime.now().strftime("%Y-%m-%d")
-        self.texts.to_csv(filename+".csv", encoding="utf-8", sep = ';')
+        self.texts.to_csv('DATA/' + filename+".csv", encoding="utf-8", sep = ';')
 
     def save_as_pkl(self,filename):
         date = datetime.datetime.now().strftime("%Y-%m-%d")
-        self.texts.to_pickle(date+"_"+filename+".pkl", encoding="utf-8")
+        self.texts.to_pickle('DATA/' + date+ "_"+filename+".pkl", encoding="utf-8")
 
     def save_as_xlsx(self,filename):
         #date = datetime.datetime.now().strftime("%Y-%m-%d")
-        self.texts.to_excel(filename+".xlsx", encoding="utf-8")
+        self.texts.to_excel('DATA/' + filename+".xlsx", encoding="utf-8")
 
-#%%              EXTRACTION OF ARTICLES
-
-urls_generales = ['https://www.elmundo.es/']
-
-urls_especificas = ['https://towardsdatascience.com','https://machinelearningmastery.com','http://news.mit.edu/topic/machine-learning']
-
-Extraccion = News()
-Extraccion.get_url_news(lista_especifica=urls_especificas, lista_general=urls_generales, termino_filtrado='machine_lerning')
-Extraccion.get_texts()
-Extraccion.save_as_csv(r"DataScience_downloads/ML_1")
-Extraccion.save_as_xlsx(r"DataScience_downloads/ML_1")
-
-#%%   READ AND TRANSLATE FILE
-articulos = []
-articulos = pd.read_csv(r"DataScience_downloads/ML_1.csv",sep = ';')
-#articulos = articulos[2:3]
-
-articulos['cuerpo'] = articulos['cuerpo'].apply(auto_truncate)
-# =============================================================================
-#     TRANSLATE ARTICLES
-# =============================================================================
-
-translator = Translator()
-articulos['titulo_traducido'] = articulos['titulo'].apply(translator.translate, src='en', dest='es').apply(getattr, args=('text',))
-
-articulos['cuerpo_traducido'] = articulos['cuerpo'].apply(translator.translate, src='en', dest='es').apply(getattr, args=('text',))
-
-articulos.to_excel(r'DataScience_downloads/ML1_translated'+".xlsx", encoding="utf-8")
-articulos.to_csv(r'DataScience_downloads/ML1_translated'+".csv", encoding="utf-8", sep = ';')
-
-# %%
-for translation in articulos.cuerpo:
-    print(translation.translator.translate)
-
-a = translator.translate(articulos.titulo[10],src='en', dest='es')
-
-#fin

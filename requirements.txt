@@ -3,7 +3,7 @@ beautifulsoup4==4.8.1
 newspaper3k==0.2.8
 googletrans==2.4.0
 DateTime==4.3
-lxml==4.5.0
+lxml==4.6.2
 nltk>=3.2.1
 googletrans==2.4.0
 google-cloud-translate==2.0.0
